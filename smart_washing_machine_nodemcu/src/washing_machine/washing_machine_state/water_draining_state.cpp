@@ -21,5 +21,6 @@ void WaterDrainingState::running_loop()
 }
 void WaterDrainingState::paused_loop()
 {
-  washing_machine->stop();
+  running_loop();
+  // washing_machine->stop();
 }
