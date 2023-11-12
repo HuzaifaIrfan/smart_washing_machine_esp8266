@@ -16,8 +16,6 @@
 class RESTAPIServer
 {
 private:
-
-    void handleNotFound();
     void restServerRouting();
     
 public:

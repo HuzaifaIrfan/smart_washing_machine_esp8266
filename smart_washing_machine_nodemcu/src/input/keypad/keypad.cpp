@@ -20,7 +20,7 @@
 //     {MACHINE_WAITING_STATE, 1, 0, 0},
 //     {MACHINE_WAITING_STATE, 1, 0, 0}};
 
-//     replace_machine_routines(new_machine_routines);
+//     change_machine_routines(new_machine_routines);
 // }
 
 Keypad::Keypad(Display *display, WashingMachineController *washing_machine_controller) : display(display), washing_machine_controller(washing_machine_controller)

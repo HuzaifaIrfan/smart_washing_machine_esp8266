@@ -5,6 +5,8 @@
 
 #include <Arduino.h>
 
+#include "utils/utils.hpp"
+
 #include "output/LABELS.hpp"
 #include "output/display/display.hpp"
 #include "washing_machine/washing_machine.hpp"
@@ -52,21 +54,6 @@ public:
   int get_count_down()
   {
     return count_down;
-  }
-
-  int validate(short tmp_value, int maximum_value, int minimum_value)
-  {
-    if (tmp_value > maximum_value)
-    {
-      return maximum_value;
-    }
-
-    if (tmp_value < minimum_value)
-    {
-      return minimum_value;
-    }
-
-    return tmp_value;
   }
 
   virtual void setup()

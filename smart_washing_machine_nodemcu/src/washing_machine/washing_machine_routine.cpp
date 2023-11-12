@@ -29,17 +29,22 @@ int machine_routines[16][4] = {
     {MACHINE_WAITING_STATE, 1, 0, 0},
     {MACHINE_WAITING_STATE, 1, 0, 0}};
 
-void replace_machine_routines(int tmp_machine_routines[16][4])
+int validate_machine_state(int machine_state)
+{
+    return validate(machine_state, ROUTINE_END_STATE, MACHINE_WAITING_STATE);
+}
+
+void change_machine_routines(int tmp_machine_routines[16][4])
 {
     for (int i = 0; i < 16; ++i)
     {
-        for (int j = 0; j < 4; ++j)
+        machine_routines[i][0] = validate_machine_state(tmp_machine_routines[i][0]);
+        for (int j = 1; j < 4; ++j)
         {
             machine_routines[i][j] = tmp_machine_routines[i][j];
         }
     }
 }
-
 
 bool get_machine_routines(int tmp_machine_routines[16][4])
 {

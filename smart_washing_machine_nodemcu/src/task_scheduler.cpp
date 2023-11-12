@@ -21,13 +21,13 @@ TaskScheduler::TaskScheduler()
 void TaskScheduler::setup()
 {
   Serial.begin(115200);
-  // buzzer.setup();
-  // display.setup();
+  buzzer.setup();
+  display.setup();
   // keypad.setup();
   washing_machine_controller.setup();
 
-  // taskManager.scheduleFixedRate(200, []
-  //                               { buzzer.loop(); });
+  taskManager.scheduleFixedRate(200, []
+                                { buzzer.loop(); });
 
   taskManager.scheduleFixedRate(1000, []
                                 { washing_machine_controller.loop();
@@ -40,8 +40,8 @@ void TaskScheduler::setup()
   taskManager.scheduleFixedRate(1, []
                                 { rest_api_server.loop(); });
 
-  // display.init();
-  // watch_dog.setup();
+  display.init();
+  watch_dog.setup();
   rest_api_server.setup();
 }
 

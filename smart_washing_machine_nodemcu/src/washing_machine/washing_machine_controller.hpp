@@ -19,11 +19,9 @@
 #include "washing_machine_state/dryer_state.hpp"
 #include "washing_machine_state/routine_end_state.hpp"
 
-
 #include "washing_machine_routine.hpp"
 
 #include "output/LABELS.hpp"
-
 
 class WashingMachineController
 {
@@ -48,15 +46,13 @@ private:
 
   short current_state_index = MACHINE_WAITING_STATE;
 
-
-
   // short machine_routine_size = sizeof(machine_routine) / sizeof(machine_routine[0]);
 
   short current_routine_state_pointer = 0;
 
   void next_routine_state();
-  void setup_next_state(int state_index);
-  void setup_next_state(int machine_routine[4]);
+
+
 public:
   WashingMachineController();
   void setup();
@@ -65,17 +61,21 @@ public:
   void reset();
   void increase_current_state_index();
   void decrease_current_state_index();
-
+  void manual_setup_next_state(int machine_routine[4]);
+  
+  void setup_next_state(int state_index);
+  void setup_next_state(int machine_routine[4]);
+  
   void run();
   void pause();
   bool is_paused();
   void hold();
-    bool is_hold();
+  bool is_hold();
   void skip();
 
   int get_current_routine_state_pointer();
-    int get_current_state_index();
-      int get_count_down();
+  int get_current_state_index();
+  int get_count_down();
 };
 
 extern WashingMachineController washing_machine_controller;

@@ -26,21 +26,26 @@ void WashingMachineController::loop()
 
 void WashingMachineController::next_routine_state()
 {
-  current_routine_state_pointer = current_routine_state_pointer + 1;
-  setup_next_state(machine_routines[current_routine_state_pointer]);
-  run();
+  if (current_routine_state_pointer < 15)
+  {
+    current_routine_state_pointer = current_routine_state_pointer + 1;
+    setup_next_state(machine_routines[current_routine_state_pointer]);
+    run();
+  }
 }
+
+
 
 void WashingMachineController::reset()
 {
   current_routine_state_pointer = 0;
   setup_next_state(machine_routines[current_routine_state_pointer]);
-  pause();
 }
 
 void WashingMachineController::setup_next_state(int state_index)
 {
-  current_state_index = state_index;
+  pause();
+  current_state_index = validate_machine_state(state_index);
   washing_machine_states[current_state_index]->setup();
 
   // Serial.println("Next State: " + String(WASHING_MACHINE_STATES_LABEL[current_state_index]));
@@ -48,9 +53,16 @@ void WashingMachineController::setup_next_state(int state_index)
 
 void WashingMachineController::setup_next_state(int machine_routine[4])
 {
-  current_state_index = machine_routine[0];
+  pause();
+  int state_index = machine_routine[0];
+  current_state_index = validate_machine_state(state_index);
   washing_machine_states[current_state_index]->setup(machine_routine[1], machine_routine[2], machine_routine[3]);
 }
+
+  void WashingMachineController::manual_setup_next_state(int machine_routine[4]){
+    current_routine_state_pointer = 14;
+    setup_next_state(machine_routine);
+  }
 
 void WashingMachineController::increase_current_state_index()
 {
@@ -58,10 +70,6 @@ void WashingMachineController::increase_current_state_index()
   {
     current_routine_state_pointer = 14;
     current_state_index = current_state_index + 1;
-    if (current_state_index > DRYER_STATE)
-    {
-      current_state_index = DRYER_STATE;
-    }
     setup_next_state(current_state_index);
   }
 }
@@ -72,10 +80,6 @@ void WashingMachineController::decrease_current_state_index()
   {
     current_routine_state_pointer = 14;
     current_state_index = current_state_index - 1;
-    if (current_state_index < WATER_FILLING_STATE)
-    {
-      current_state_index = WATER_FILLING_STATE;
-    }
     setup_next_state(current_state_index);
   }
 }
