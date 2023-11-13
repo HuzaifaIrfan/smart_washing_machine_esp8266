@@ -72,6 +72,8 @@ public:
   void hold();
   bool is_hold();
   void skip();
+  bool is_lid_closed();
+  
 
   int get_current_routine_state_pointer();
   int get_current_state_index();

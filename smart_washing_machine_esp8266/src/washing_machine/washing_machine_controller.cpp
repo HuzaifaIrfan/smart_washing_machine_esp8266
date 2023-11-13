@@ -109,6 +109,13 @@ bool WashingMachineController::is_hold()
   return washing_machine_states[current_state_index]->is_hold();
 }
 
+bool WashingMachineController::is_lid_closed()
+{
+  return washing_machine.is_lid_closed();
+}
+
+
+
 void WashingMachineController::skip()
 {
   washing_machine_states[current_state_index]->skip();

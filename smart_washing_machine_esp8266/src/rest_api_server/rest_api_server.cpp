@@ -156,6 +156,12 @@ void RESTAPIServer::restServerRouting()
                Serial.println("Skip");
               washing_machine_controller.skip();
               server.send(200, "text/json", "{\"success\": true}"); });
+              
+  server.on("/is_lid_closed", HTTP_GET, []()
+            { 
+               Serial.println("is_lid_closed");
+              int value = int(washing_machine_controller.is_lid_closed());
+              server.send(200, "text/json", "{\"value\": "+String(value)+"}"); });
 
   server.on("/current_routine", HTTP_GET, []()
             { 
