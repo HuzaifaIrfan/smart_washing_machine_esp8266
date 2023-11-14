@@ -48,9 +48,9 @@ private:
 
   // short washing_machine_task_size = sizeof(washing_machine_task) / sizeof(washing_machine_task[0]);
 
-  short current_task_task_pointer = 0;
+  short current_task_sequence_pointer = 0;
 
-  void next_task_task();
+  void next_task_sequence();
 
 
 public:
@@ -75,7 +75,7 @@ public:
   bool is_lid_closed();
   
 
-  int get_current_task_task_pointer();
+  int get_current_task_sequence_pointer();
   int get_current_task_index();
   int get_count_down();
 };

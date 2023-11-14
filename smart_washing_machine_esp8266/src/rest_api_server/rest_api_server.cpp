@@ -8,7 +8,6 @@ StaticJsonDocument<2048> jsonBuffer;
 
 ESP8266WebServer server(80);
 
-
 // Serving next_washing_machine_task_request
 void next_washing_machine_task_request()
 {
@@ -25,21 +24,21 @@ void next_washing_machine_task_request()
 
   Serial.println(washing_machine_task_json);
   deserializeJson(jsonBuffer, washing_machine_task_json);
-  short got_task_size =jsonBuffer.size();
-  Serial.println("jsonBuffer size:"+String(got_task_size));
+  short got_task_size = jsonBuffer.size();
+  Serial.println("jsonBuffer size:" + String(got_task_size));
 
-  if(not (got_task_size==4)){
-    server.send(400, "text/json", "{\"error\": \"Invalid Task Sequence Size\", \"value\": " + String(got_task_size) + "}");
+  if (not(got_task_size == 4))
+  {
+    server.send(400, "text/json", "{\"error\": \"Invalid Task Size\", \"value\": " + String(got_task_size) + "}");
     return;
   }
 
   int tmp_washing_machine_task[4] = {0};
 
-
-        for (int j = 0; j < 4; ++j)
-        {
-            tmp_washing_machine_task[j] = jsonBuffer[j];
-        }
+  for (int j = 0; j < 4; ++j)
+  {
+    tmp_washing_machine_task[j] = jsonBuffer[j];
+  }
 
   washing_machine_controller.pause();
 
@@ -48,10 +47,9 @@ void next_washing_machine_task_request()
   washing_machine_task_json = "";
   serializeJson(jsonBuffer, washing_machine_task_json);
 
-  int current_task_task_pointer = int(washing_machine_controller.get_current_task_task_pointer());
-  server.send(200, "text/json", "{\"washing_machine_task\": " + String(washing_machine_task_json) + ", \"current_task_task_pointer\": " + String(current_task_task_pointer) + "}");
+  int current_task_sequence_pointer = int(washing_machine_controller.get_current_task_sequence_pointer());
+  server.send(200, "text/json", "{\"washing_machine_task\": " + String(washing_machine_task_json) + ", \"current_task_sequence_pointer\": " + String(current_task_sequence_pointer) + "}");
 }
-
 
 // Serving change_washing_machine_task_sequence_request
 void change_washing_machine_task_sequence_request()
@@ -65,31 +63,28 @@ void change_washing_machine_task_sequence_request()
     return;
   }
 
-  String washing_machine_task_json = server.arg("plain");
+  String washing_machine_task_sequence_json = server.arg("plain");
 
-  Serial.println(washing_machine_task_json);
-  deserializeJson(jsonBuffer, washing_machine_task_json);
-  short got_task_sequence_size =jsonBuffer.size();
-  Serial.println("jsonBuffer size:"+String(got_task_sequence_size));
+  Serial.println(washing_machine_task_sequence_json);
+  deserializeJson(jsonBuffer, washing_machine_task_sequence_json);
+  short got_task_sequence_size = jsonBuffer.size();
+  Serial.println("jsonBuffer size:" + String(got_task_sequence_size));
 
-  if(not (got_task_sequence_size==16)){
+  if (not(got_task_sequence_size == 16))
+  {
     server.send(400, "text/json", "{\"error\": \"Invalid Task Sequence Size\", \"value\": " + String(got_task_sequence_size) + "}");
     return;
   }
 
   int tmp_washing_machine_task_sequence[16][4] = {0};
 
-    for (int i = 0; i < 16; ++i)
+  for (int i = 0; i < 16; ++i)
+  {
+    for (int j = 0; j < 4; ++j)
     {
-        for (int j = 0; j < 4; ++j)
-        {
-            tmp_washing_machine_task_sequence[i][j] = jsonBuffer[i][j];
-        }
+      tmp_washing_machine_task_sequence[i][j] = jsonBuffer[i][j];
     }
-  
-
-
-
+  }
 
   washing_machine_controller.pause();
   washing_machine_controller.reset();
@@ -99,11 +94,11 @@ void change_washing_machine_task_sequence_request()
   get_washing_machine_task_sequence(tmp_washing_machine_task_sequence);
   copyArray(tmp_washing_machine_task_sequence, jsonBuffer);
 
-  washing_machine_task_json = "";
-  serializeJson(jsonBuffer, washing_machine_task_json);
+  washing_machine_task_sequence_json = "";
+  serializeJson(jsonBuffer, washing_machine_task_sequence_json);
 
-  int current_task_task_pointer = int(washing_machine_controller.get_current_task_task_pointer());
-  server.send(200, "text/json", "{\"washing_machine_task_sequence\": " + String(washing_machine_task_json) + ", \"current_task_task_pointer\": " + String(current_task_task_pointer) + "}");
+  int current_task_sequence_pointer = int(washing_machine_controller.get_current_task_sequence_pointer());
+  server.send(200, "text/json", "{\"washing_machine_task_sequence\": " + String(washing_machine_task_sequence_json) + ", \"current_task_sequence_pointer\": " + String(current_task_sequence_pointer) + "}");
 }
 
 // Define routing
@@ -156,36 +151,63 @@ void RESTAPIServer::restServerRouting()
                Serial.println("Skip");
               washing_machine_controller.skip();
               server.send(200, "text/json", "{\"success\": true}"); });
-              
+
   server.on("/is_lid_closed", HTTP_GET, []()
             { 
                Serial.println("is_lid_closed");
               int value = int(washing_machine_controller.is_lid_closed());
               server.send(200, "text/json", "{\"value\": "+String(value)+"}"); });
 
-  server.on("/current_task", HTTP_GET, []()
+  server.on("/current_task_sequence", HTTP_GET, []()
             { 
-              Serial.println("current_task");
+              Serial.println("current_task_sequence");
 
               int tmp_washing_machine_task_sequence[16][4] = {0};
               get_washing_machine_task_sequence(tmp_washing_machine_task_sequence);
               copyArray(tmp_washing_machine_task_sequence, jsonBuffer);
-              String washing_machine_task_json;  
-              serializeJson(jsonBuffer, washing_machine_task_json);
+              String washing_machine_task_sequence_json;  
+              serializeJson(jsonBuffer, washing_machine_task_sequence_json);
+              int current_task_sequence_pointer = int(washing_machine_controller.get_current_task_sequence_pointer());
 
-
-              int current_task_task_pointer = int(washing_machine_controller.get_current_task_task_pointer());
-              server.send(200, "text/json", "{\"washing_machine_task\": "+String(washing_machine_task_json)+", \"current_task_task_pointer\": "+String(current_task_task_pointer)+"}"); });
+              server.send(200, "text/json", "{\"task_sequence\": "+String(washing_machine_task_sequence_json)+", \"task_sequence_pointer\": "+String(current_task_sequence_pointer)+"}"); });
 
   server.on("/current_task", HTTP_GET, []()
             { 
                Serial.println("current_task");
               int current_task_index = int(washing_machine_controller.get_current_task_index());
               int count_down = int(washing_machine_controller.get_count_down());
-              server.send(200, "text/json", "{\"current_task_index\": "+String(current_task_index)+", \"count_down\": "+String(count_down)+"}"); });
+              server.send(200, "text/json", "{\"task\": "+String(current_task_index)+", \"count_down\": "+String(count_down)+"}"); });
+
+  server.on("/current_status", HTTP_GET, []()
+            {
+              Serial.println("current_status");
+
+              Serial.println("is_paused");
+              int is_paused = int(washing_machine_controller.is_paused());
+
+              Serial.println("is_hold");
+              int is_hold = int(washing_machine_controller.is_hold());
+
+              Serial.println("is_lid_closed");
+              int is_lid_closed = int(washing_machine_controller.is_lid_closed());
+
+              Serial.println("current_task_sequence");
+              int tmp_washing_machine_task_sequence[16][4] = {0};
+              get_washing_machine_task_sequence(tmp_washing_machine_task_sequence);
+              copyArray(tmp_washing_machine_task_sequence, jsonBuffer);
+              String washing_machine_task_sequence_json;
+              serializeJson(jsonBuffer, washing_machine_task_sequence_json);
+              int current_task_sequence_pointer = int(washing_machine_controller.get_current_task_sequence_pointer());
+
+              Serial.println("current_status");
+              int current_task_index = int(washing_machine_controller.get_current_task_index());
+              int count_down = int(washing_machine_controller.get_count_down());
+
+              server.send(200, "text/json", "{\"is_paused\": " + String(is_paused) + ", \"is_hold\": " + String(is_hold) + ", \"is_lid_closed\": " + String(is_lid_closed) + ", \"task_sequence\": " + String(washing_machine_task_sequence_json) + ", \"task_sequence_pointer\": " + String(current_task_sequence_pointer) + ", \"task\": " + String(current_task_index) + ", \"count_down\": " + String(count_down) + "}");
+            });
 
   server.on("/change_washing_machine_task_sequence", HTTP_POST, change_washing_machine_task_sequence_request);
-    server.on("/next_washing_machine_task", HTTP_POST, next_washing_machine_task_request);
+  server.on("/next_washing_machine_task", HTTP_POST, next_washing_machine_task_request);
 }
 
 RESTAPIServer::RESTAPIServer()

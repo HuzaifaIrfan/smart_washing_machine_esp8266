@@ -52,7 +52,7 @@ void Display::display_current_task(int current_task_index){
     // print(String(WASHING_MACHINE_TASKS_LABEL[current_task_index]));
 }
 
-void Display::display_current_task(int washing_machine_task[][4], short current_task_task_pointer)
+void Display::display_current_task_sequence(int washing_machine_task_sequence[][4], short current_task_sequence_pointer)
 {
 
     // set_cursor(0, 0);
@@ -60,7 +60,7 @@ void Display::display_current_task(int washing_machine_task[][4], short current_
     // for (int i = 0; i < 16; ++i)
     // {
     //     short task_index = washing_machine_task[i][0];
-    //     if (i < current_task_task_pointer)
+    //     if (i < current_task_sequence_pointer)
     //     {
     //         print(">");
     //     }

@@ -18,7 +18,7 @@ public:
   void print(String message);
   void set_cursor_and_print(String message, uint8_t col, uint8_t row);
 
-  void display_current_task(int washing_machine_task[][4], short current_task_task_pointer);
+  void display_current_task_sequence(int washing_machine_task_sequence[][4], short current_task_sequence_pointer);
   void display_current_task(int current_task_index);
   void display_count_down(int count_down);
 };
