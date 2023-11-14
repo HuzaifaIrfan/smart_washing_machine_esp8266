@@ -41,6 +41,12 @@ public:
     hold_task = true;
   }
 
+
+  bool is_running()
+  {
+    return running_task;
+  }
+
   bool is_paused()
   {
     return not running_task;

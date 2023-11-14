@@ -99,6 +99,11 @@ bool WashingMachineController::is_paused()
   return washing_machine_tasks[current_task_index]->is_paused();
 }
 
+bool WashingMachineController::is_running()
+{
+  return washing_machine_tasks[current_task_index]->is_running();
+}
+
 void WashingMachineController::hold()
 {
   washing_machine_tasks[current_task_index]->hold();

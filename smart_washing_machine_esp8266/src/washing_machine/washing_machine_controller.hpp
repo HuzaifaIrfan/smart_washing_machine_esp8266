@@ -69,6 +69,7 @@ public:
   void run();
   void pause();
   bool is_paused();
+  bool is_running();
   void hold();
   bool is_hold();
   void skip();
