@@ -1,7 +1,7 @@
 
 #include "LABELS.hpp"
 
-char WASHING_MACHINE_STATES_CHAR[7] = {
+char WASHING_MACHINE_TASKS_CHAR[7] = {
     '-',
     'F',
     'W',
@@ -10,7 +10,7 @@ char WASHING_MACHINE_STATES_CHAR[7] = {
     'D',
     'E'};
 
-String WASHING_MACHINE_STATES_LABEL[7] = {
+String WASHING_MACHINE_TASKS_LABEL[7] = {
     "Waiting ",
     "Filling ",
     "Washing ",

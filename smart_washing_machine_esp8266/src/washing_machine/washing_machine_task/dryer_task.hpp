@@ -1,10 +1,10 @@
 
-#ifndef _DryerState_H_
-#define _DryerState_H_
+#ifndef _DryerTask_H_
+#define _DryerTask_H_
 
-#include "washing_machine_state.hpp"
+#include "washing_machine_task.hpp"
 
-class DryerState : public WashingMachineState
+class DryerTask : public WashingMachineTask
 {
 
 private:
@@ -16,7 +16,7 @@ private:
   int MINIMUM_COUNTDOWN = 60;
 
 public:
-  using WashingMachineState::WashingMachineState;
+  using WashingMachineTask::WashingMachineTask;
   void setup();
   void setup(int tmp_count_down);
   void run();

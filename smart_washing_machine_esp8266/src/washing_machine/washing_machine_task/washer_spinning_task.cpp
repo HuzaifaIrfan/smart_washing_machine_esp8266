@@ -1,19 +1,19 @@
 
 
-#include "washer_spinning_state.hpp"
+#include "washer_spinning_task.hpp"
 
-void WasherSpinningState::setup()
+void WasherSpinningTask::setup()
 {
   setup(DEFAULT_COUNTDOWN);
 }
 
-void WasherSpinningState::setup(int tmp_count_down)
+void WasherSpinningTask::setup(int tmp_count_down)
 {
 
   setup(tmp_count_down, DEFAULT_SPIN_TIME, DEFAULT_WAIT_TIME);
 }
 
-void WasherSpinningState::setup(int tmp_count_down, int tmp_spin_time, int tmp_wait_time)
+void WasherSpinningTask::setup(int tmp_count_down, int tmp_spin_time, int tmp_wait_time)
 {
   count_down = validate(tmp_count_down, MAXIMUM_COUNTDOWN, MINIMUM_COUNTDOWN);
 
@@ -22,23 +22,23 @@ void WasherSpinningState::setup(int tmp_count_down, int tmp_spin_time, int tmp_w
 
   toggle_spin();
 
-  Serial.println(WASHING_MACHINE_STATES_LABEL[WASHER_SPINNING_STATE] + " countdown Set: " + String(count_down));
+  Serial.println(WASHING_MACHINE_TASKS_LABEL[WASHER_SPINNING_TASK] + " countdown Set: " + String(count_down));
   Serial.println("spin_time:"+String(spin_time)+" wait_time:"+String(wait_time));
 }
 
-void WasherSpinningState::running_loop()
+void WasherSpinningTask::running_loop()
 {
   washing_machine->close_drain_valve();
   washing_machine->close_inlet_valves();
   spin_loop();
 }
 
-void WasherSpinningState::paused_loop()
+void WasherSpinningTask::paused_loop()
 {
   washing_machine->stop();
 }
 
-void WasherSpinningState::spin_loop()
+void WasherSpinningTask::spin_loop()
 {
   spin_count_down = spin_count_down - 1;
   if (spin_count_down <= wait_time)
@@ -62,7 +62,7 @@ void WasherSpinningState::spin_loop()
   }
 }
 
-void WasherSpinningState::toggle_spin()
+void WasherSpinningTask::toggle_spin()
 {
   clockwise_spin_now = not clockwise_spin_now;
   spin_count_down = spin_time + wait_time;

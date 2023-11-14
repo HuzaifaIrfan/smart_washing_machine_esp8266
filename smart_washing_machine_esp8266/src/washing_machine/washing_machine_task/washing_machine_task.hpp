@@ -1,7 +1,7 @@
 
 
-#ifndef _WashingMachineState_H_
-#define _WashingMachineState_H_
+#ifndef _WashingMachineTask_H_
+#define _WashingMachineTask_H_
 
 #include <Arduino.h>
 
@@ -11,12 +11,12 @@
 #include "output/display/display.hpp"
 #include "washing_machine/washing_machine.hpp"
 
-class WashingMachineState
+class WashingMachineTask
 {
 protected:
   WashingMachine *washing_machine = nullptr;
-  bool running_state = false;
-  bool hold_state = false;
+  bool running_task = false;
+  bool hold_task = false;
   int count_down = 0;
 
   int DEFAULT_COUNTDOWN = 5;
@@ -27,28 +27,28 @@ protected:
   virtual void paused_loop(){};
 
 public:
-  explicit WashingMachineState(WashingMachine *washing_machine)
+  explicit WashingMachineTask(WashingMachine *washing_machine)
       : washing_machine(washing_machine) {}
 
   virtual void run()
   {
-    running_state = true;
-    hold_state = false;
+    running_task = true;
+    hold_task = false;
   }
   void pause()
   {
-    running_state = false;
-    hold_state = true;
+    running_task = false;
+    hold_task = true;
   }
 
   bool is_paused()
   {
-    return not running_state;
+    return not running_task;
   }
 
   bool is_hold()
   {
-    return hold_state;
+    return hold_task;
   }
 
   int get_count_down()
@@ -72,10 +72,10 @@ public:
 
   bool loop()
   {
-    if (running_state)
+    if (running_task)
     {
       running_loop();
-      if (not hold_state)
+      if (not hold_task)
       {
         count_down = count_down - 1;
       }
@@ -101,13 +101,13 @@ public:
 
   void hold()
   {
-    hold_state = true;
+    hold_task = true;
   }
 
   virtual bool skip()
   {
     count_down = 0;
-    hold_state = false;
+    hold_task = false;
     return true;
   }
 };

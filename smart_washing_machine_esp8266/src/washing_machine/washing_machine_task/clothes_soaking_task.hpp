@@ -1,10 +1,10 @@
 
-#ifndef _ClothesSoakingState_H_
-#define _ClothesSoakingState_H_
+#ifndef _ClothesSoakingTask_H_
+#define _ClothesSoakingTask_H_
 
-#include "washing_machine_state.hpp"
+#include "washing_machine_task.hpp"
 
-class ClothesSoakingState : public WashingMachineState
+class ClothesSoakingTask : public WashingMachineTask
 {
 
 private:
@@ -16,7 +16,7 @@ private:
   int MINIMUM_COUNTDOWN = 60;
 
 public:
-  using WashingMachineState::WashingMachineState;
+  using WashingMachineTask::WashingMachineTask;
   void setup();
   void setup(int tmp_count_down);
 };

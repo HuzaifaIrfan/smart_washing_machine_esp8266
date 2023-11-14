@@ -1,10 +1,10 @@
 
-#ifndef _MachineWaitingState_H_
-#define _MachineWaitingState_H_
+#ifndef _MachineWaitingTask_H_
+#define _MachineWaitingTask_H_
 
-#include "washing_machine_state.hpp"
+#include "washing_machine_task.hpp"
 
-class MachineWaitingState : public WashingMachineState
+class MachineWaitingTask : public WashingMachineTask
 {
 
 private:
@@ -16,7 +16,7 @@ private:
   int MINIMUM_COUNTDOWN = 1;
 
 public:
-  using WashingMachineState::WashingMachineState;
+  using WashingMachineTask::WashingMachineTask;
   void setup();
   void setup(int tmp_count_down);
   bool skip();

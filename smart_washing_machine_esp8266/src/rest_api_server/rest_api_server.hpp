@@ -10,7 +10,7 @@
 
 #include <ArduinoJson.h>
 
-#include "washing_machine/washing_machine_routine.hpp"
+#include "washing_machine/washing_machine_task_sequence.hpp"
 #include "washing_machine/washing_machine_controller.hpp"
 
 class RESTAPIServer

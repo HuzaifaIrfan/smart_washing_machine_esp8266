@@ -1,10 +1,10 @@
 
-#ifndef _WaterDrainingState_H_
-#define _WaterDrainingState_H_
+#ifndef _WaterDrainingTask_H_
+#define _WaterDrainingTask_H_
 
-#include "washing_machine_state.hpp"
+#include "washing_machine_task.hpp"
 
-class WaterDrainingState : public WashingMachineState
+class WaterDrainingTask : public WashingMachineTask
 {
 
 private:
@@ -16,7 +16,7 @@ private:
   int MINIMUM_COUNTDOWN = 120;
 
 public:
-  using WashingMachineState::WashingMachineState;
+  using WashingMachineTask::WashingMachineTask;
   void setup();
   void setup(int tmp_count_down);
 };

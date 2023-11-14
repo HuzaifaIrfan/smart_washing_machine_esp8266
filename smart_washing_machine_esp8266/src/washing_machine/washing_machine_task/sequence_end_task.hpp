@@ -1,11 +1,11 @@
 
-#ifndef _RoutineEndState_H_
-#define _RoutineEndState_H_
+#ifndef _SequenceEndTask_H_
+#define _SequenceEndTask_H_
 
-#include "washing_machine_state.hpp"
+#include "washing_machine_task.hpp"
 #include "output/buzzer/buzzer.hpp"
 
-class RoutineEndState : public WashingMachineState
+class SequenceEndTask : public WashingMachineTask
 {
 
 private:
@@ -17,7 +17,7 @@ private:
   int MINIMUM_COUNTDOWN = 5;
 
 public:
-  using WashingMachineState::WashingMachineState;
+  using WashingMachineTask::WashingMachineTask;
   void setup();
   void setup(int tmp_count_down);
   void setup(int tmp_count_down, int beep_count);

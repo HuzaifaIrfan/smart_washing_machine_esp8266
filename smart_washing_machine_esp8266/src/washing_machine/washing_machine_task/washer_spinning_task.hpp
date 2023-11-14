@@ -1,10 +1,10 @@
 
-#ifndef _WasherSpinningState_H_
-#define _WasherSpinningState_H_
+#ifndef _WasherSpinningTask_H_
+#define _WasherSpinningTask_H_
 
-#include "washing_machine_state.hpp"
+#include "washing_machine_task.hpp"
 
-class WasherSpinningState : public WashingMachineState
+class WasherSpinningTask : public WashingMachineTask
 {
 
 private:
@@ -33,7 +33,7 @@ private:
   void toggle_spin();
 
 public:
-  using WashingMachineState::WashingMachineState;
+  using WashingMachineTask::WashingMachineTask;
   void setup();
   void setup(int tmp_count_down);
   void setup(int tmp_count_down, int tmp_spin_time, int tmp_wait_time);

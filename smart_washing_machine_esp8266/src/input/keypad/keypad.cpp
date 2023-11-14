@@ -1,26 +1,26 @@
 
 #include "keypad.hpp"
 
-// void change_to_new_routine(){
-// int new_machine_routines[16][4] = {
-//     {MACHINE_WAITING_STATE, 1, 0, 0},
-//     {MACHINE_WAITING_STATE, 1, 0, 0},
-//     {MACHINE_WAITING_STATE, 1, 0, 0},
-//     {MACHINE_WAITING_STATE, 1, 0, 0},
-//     {MACHINE_WAITING_STATE, 1, 0, 0},
-//     {MACHINE_WAITING_STATE, 1, 0, 0},
-//     {MACHINE_WAITING_STATE, 1, 0, 0},
-//     {MACHINE_WAITING_STATE, 1, 0, 0},
-//     {MACHINE_WAITING_STATE, 1, 0, 0},
-//     {MACHINE_WAITING_STATE, 1, 0, 0},
-//     {MACHINE_WAITING_STATE, 1, 0, 0},
-//     {MACHINE_WAITING_STATE, 1, 0, 0},
-//     {MACHINE_WAITING_STATE, 1, 0, 0},
-//     {MACHINE_WAITING_STATE, 1, 0, 0},
-//     {MACHINE_WAITING_STATE, 1, 0, 0},
-//     {MACHINE_WAITING_STATE, 1, 0, 0}};
+// void change_to_new_task(){
+// int new_washing_machine_task_sequence[16][4] = {
+//     {MACHINE_WAITING_TASK, 1, 0, 0},
+//     {MACHINE_WAITING_TASK, 1, 0, 0},
+//     {MACHINE_WAITING_TASK, 1, 0, 0},
+//     {MACHINE_WAITING_TASK, 1, 0, 0},
+//     {MACHINE_WAITING_TASK, 1, 0, 0},
+//     {MACHINE_WAITING_TASK, 1, 0, 0},
+//     {MACHINE_WAITING_TASK, 1, 0, 0},
+//     {MACHINE_WAITING_TASK, 1, 0, 0},
+//     {MACHINE_WAITING_TASK, 1, 0, 0},
+//     {MACHINE_WAITING_TASK, 1, 0, 0},
+//     {MACHINE_WAITING_TASK, 1, 0, 0},
+//     {MACHINE_WAITING_TASK, 1, 0, 0},
+//     {MACHINE_WAITING_TASK, 1, 0, 0},
+//     {MACHINE_WAITING_TASK, 1, 0, 0},
+//     {MACHINE_WAITING_TASK, 1, 0, 0},
+//     {MACHINE_WAITING_TASK, 1, 0, 0}};
 
-//     change_machine_routines(new_machine_routines);
+//     change_washing_machine_task_sequence(new_washing_machine_task_sequence);
 // }
 
 Keypad::Keypad(Display *display, WashingMachineController *washing_machine_controller) : display(display), washing_machine_controller(washing_machine_controller)
@@ -59,22 +59,22 @@ void Keypad::loop()
   // case btnUP:
   // {
   //   // display->print("UP    ");
-  //   Serial.println("Increase Current State");
-  //   washing_machine_controller->increase_current_state_index();
+  //   Serial.println("Increase Current Task");
+  //   washing_machine_controller->increase_current_task_index();
   //   break;
   // }
   // case btnDOWN:
   // {
   //   // display->print("DOWN  ");
-  //   Serial.println("Decrease Current State");
-  //   washing_machine_controller->decrease_current_state_index();
+  //   Serial.println("Decrease Current Task");
+  //   washing_machine_controller->decrease_current_task_index();
   //   break;
   // }
   // case btnRIGHT:
   // {
   //   // display->print("RIGHT ");
   //   Serial.println("Reset");
-  //   // change_to_new_routine();
+  //   // change_to_new_task();
   //   washing_machine_controller->reset();
   //   break;
   // }

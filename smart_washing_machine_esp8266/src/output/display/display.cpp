@@ -47,26 +47,26 @@ void Display::display_count_down(int count_down){
     // print(String(count_down)+"   ");
 }
 
-void Display::display_current_state(int current_state_index){
+void Display::display_current_task(int current_task_index){
     // set_cursor(8, 1);
-    // print(String(WASHING_MACHINE_STATES_LABEL[current_state_index]));
+    // print(String(WASHING_MACHINE_TASKS_LABEL[current_task_index]));
 }
 
-void Display::display_current_routine(int machine_routine[][4], short current_routine_state_pointer)
+void Display::display_current_task(int washing_machine_task[][4], short current_task_task_pointer)
 {
 
     // set_cursor(0, 0);
 
     // for (int i = 0; i < 16; ++i)
     // {
-    //     short state_index = machine_routine[i][0];
-    //     if (i < current_routine_state_pointer)
+    //     short task_index = washing_machine_task[i][0];
+    //     if (i < current_task_task_pointer)
     //     {
     //         print(">");
     //     }
     //     else
     //     {
-    //         print(String(WASHING_MACHINE_STATES_CHAR[state_index]));
+    //         print(String(WASHING_MACHINE_TASKS_CHAR[task_index]));
     //     }
     // }
 

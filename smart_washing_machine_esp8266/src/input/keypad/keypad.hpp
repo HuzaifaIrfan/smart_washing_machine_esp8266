@@ -6,7 +6,7 @@
 #include "output/display/display.hpp"
 #include "washing_machine/washing_machine_controller.hpp"
 
-#include "washing_machine/washing_machine_routine.hpp"
+#include "washing_machine/washing_machine_task/washing_machine_task.hpp"
 
 #include "GPIO_CONFIG.hpp"
 

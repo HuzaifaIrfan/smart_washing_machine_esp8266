@@ -1,19 +1,19 @@
 
 
-#include "dryer_state.hpp"
+#include "dryer_task.hpp"
 
-void DryerState::setup()
+void DryerTask::setup()
 {
   setup(DEFAULT_COUNTDOWN);
 }
 
-void DryerState::setup(int tmp_count_down)
+void DryerTask::setup(int tmp_count_down)
 {
   count_down = validate(tmp_count_down, MAXIMUM_COUNTDOWN, MINIMUM_COUNTDOWN);
-  Serial.println(WASHING_MACHINE_STATES_LABEL[DRYER_STATE] + " countdown Set: " + String(count_down));
+  Serial.println(WASHING_MACHINE_TASKS_LABEL[DRYER_TASK] + " countdown Set: " + String(count_down));
 }
 
-void DryerState::running_loop()
+void DryerTask::running_loop()
 {
   if (not washing_machine->is_lid_closed())
   {
@@ -24,20 +24,20 @@ void DryerState::running_loop()
   washing_machine->spin_dryer();
 }
 
-void DryerState::paused_loop()
+void DryerTask::paused_loop()
 {
   washing_machine->open_drain_valve();
   washing_machine->close_inlet_valves();
   washing_machine->stop_dryer();
 }
 
-void DryerState::run()
+void DryerTask::run()
 {
   washing_machine->close_lid();
   if (washing_machine->is_lid_closed())
   {
-    running_state = true;
-    hold_state = false;
+    running_task = true;
+    hold_task = false;
   }
   else
   {
