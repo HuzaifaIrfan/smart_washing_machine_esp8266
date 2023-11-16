@@ -110,10 +110,15 @@ public:
     hold_task = true;
   }
 
+  void unhold()
+  {
+    hold_task = false;
+  }
+
+
   virtual bool skip()
   {
     count_down = 0;
-    hold_task = false;
     return true;
   }
 };

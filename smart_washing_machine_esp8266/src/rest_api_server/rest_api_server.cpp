@@ -134,6 +134,13 @@ void RESTAPIServer::restServerRouting()
               washing_machine_controller.reset();
               server.send(200, "text/json", "{\"success\": true}"); });
 
+  server.on("/restart", HTTP_GET, []()
+            { 
+               Serial.println("Reset");
+              washing_machine_controller.reset();
+              server.send(200, "text/json", "{\"success\": true}");
+              ESP.restart(); });
+
   server.on("/hold", HTTP_GET, []()
             { 
                Serial.println("Hold");
@@ -203,8 +210,7 @@ void RESTAPIServer::restServerRouting()
               int current_task_index = int(washing_machine_controller.get_current_task_index());
               int count_down = int(washing_machine_controller.get_count_down());
 
-              server.send(200, "text/json", "{\"is_running\": " + String(is_running) + ", \"is_hold\": " + String(is_hold) + ", \"is_lid_closed\": " + String(is_lid_closed) + ", \"task_sequence_pointer\": " + String(current_task_sequence_pointer) + ", \"task\": " + String(current_task_index) + ", \"count_down\": " + String(count_down) + "}");
-            });
+              server.send(200, "text/json", "{\"is_running\": " + String(is_running) + ", \"is_hold\": " + String(is_hold) + ", \"is_lid_closed\": " + String(is_lid_closed) + ", \"task_sequence_pointer\": " + String(current_task_sequence_pointer) + ", \"task\": " + String(current_task_index) + ", \"count_down\": " + String(count_down) + "}"); });
 
   server.on("/change_washing_machine_task_sequence", HTTP_POST, change_washing_machine_task_sequence_request);
   server.on("/next_washing_machine_task", HTTP_POST, next_washing_machine_task_request);

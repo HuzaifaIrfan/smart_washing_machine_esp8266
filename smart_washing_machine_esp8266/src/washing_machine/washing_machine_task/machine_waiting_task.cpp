@@ -25,6 +25,5 @@ void MachineWaitingTask::paused_loop()
 
 bool MachineWaitingTask::skip()
 {
-    hold_task = false;
     return false;
 }

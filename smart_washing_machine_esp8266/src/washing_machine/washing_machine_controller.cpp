@@ -34,8 +34,6 @@ void WashingMachineController::next_task_sequence()
   }
 }
 
-
-
 void WashingMachineController::reset()
 {
   current_task_sequence_pointer = 0;
@@ -59,10 +57,11 @@ void WashingMachineController::setup_next_task(int washing_machine_task[4])
   washing_machine_tasks[current_task_index]->setup(washing_machine_task[1], washing_machine_task[2], washing_machine_task[3]);
 }
 
-  void WashingMachineController::manual_setup_next_task(int washing_machine_task[4]){
-    current_task_sequence_pointer = 14;
-    setup_next_task(washing_machine_task);
-  }
+void WashingMachineController::manual_setup_next_task(int washing_machine_task[4])
+{
+  current_task_sequence_pointer = 14;
+  setup_next_task(washing_machine_task);
+}
 
 void WashingMachineController::increase_current_task_index()
 {
@@ -119,11 +118,17 @@ bool WashingMachineController::is_lid_closed()
   return washing_machine.is_lid_closed();
 }
 
-
-
 void WashingMachineController::skip()
 {
-  washing_machine_tasks[current_task_index]->skip();
+  washing_machine_tasks[current_task_index]->unhold();
+  if (is_paused())
+  {
+    washing_machine_tasks[current_task_index]->run();
+  }
+  else
+  {
+    washing_machine_tasks[current_task_index]->skip();
+  }
 }
 
 int WashingMachineController::get_current_task_sequence_pointer()
