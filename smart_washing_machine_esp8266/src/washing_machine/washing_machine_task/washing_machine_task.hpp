@@ -32,6 +32,7 @@ public:
 
   virtual void run()
   {
+      washing_machine->close_lid();
     running_task = true;
     hold_task = false;
   }

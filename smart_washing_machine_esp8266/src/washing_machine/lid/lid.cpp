@@ -11,6 +11,7 @@ void Lid::setup()
 {
   pinMode(pin, INPUT_PULLUP);
   attachInterrupt(digitalPinToInterrupt(pin), lid_open_or_dryer_vibration_switch_interrupt_service_routine, RISING);
+  loop();
 }
 
 void ICACHE_RAM_ATTR Lid::lid_open_or_dryer_vibration_switch_interrupt_service_routine() {

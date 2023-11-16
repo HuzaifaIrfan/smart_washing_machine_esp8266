@@ -18,6 +18,8 @@ void DryerTask::running_loop()
   if (not washing_machine->is_lid_closed())
   {
     pause();
+    paused_loop();
+    return;
   }
   washing_machine->open_drain_valve();
   washing_machine->close_inlet_valves();

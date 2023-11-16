@@ -17,13 +17,13 @@ void Relay::loop()
 
 void Relay::on()
 {
-    digitalWrite(pin, LOW);
+    digitalWrite(pin, HIGH);
     state = true;
 }
 
 void Relay::off()
 {
-    digitalWrite(pin, HIGH);
+    digitalWrite(pin, LOW);
     state = false;
 }
 

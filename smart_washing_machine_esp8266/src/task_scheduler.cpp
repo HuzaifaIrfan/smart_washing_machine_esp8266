@@ -42,14 +42,14 @@ TaskScheduler::TaskScheduler()
 void TaskScheduler::setup()
 {
   Serial.begin(115200);
-  buzzer.setup();
-  display.setup();
-  buttons.setup();
+  // buzzer.setup();
+  // display.setup();
+  // buttons.setup();
 
   washing_machine_controller.setup();
 
-  taskManager.scheduleFixedRate(200, []
-                                { buzzer.loop(); });
+  // taskManager.scheduleFixedRate(200, []
+  //                               { buzzer.loop(); });
 
   taskManager.scheduleFixedRate(200, []
                                 {
@@ -61,8 +61,8 @@ void TaskScheduler::setup()
                                   }
                                 });
 
-  taskManager.scheduleFixedRate(100, []
-                                { buttons.loop(); });
+  // taskManager.scheduleFixedRate(100, []
+  //                               { buttons.loop(); });
 
   taskManager.scheduleFixedRate(1, []
                                 { rest_api_server.loop(); });
@@ -78,7 +78,7 @@ void TaskScheduler::setup()
     Serial.println(F("Can't set ITimer correctly. Select another freq. or interval"));
   }
 
-  display.init();
+  // display.init();
   watch_dog.setup();
   rest_api_server.setup();
 }
