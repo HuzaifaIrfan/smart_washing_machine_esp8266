@@ -11,7 +11,7 @@ private:
   void running_loop();
   void paused_loop();
 
-  int MAXIMUM_COUNTDOWN = 60;
+  int MAXIMUM_COUNTDOWN = 1200;
   int DEFAULT_COUNTDOWN = 60;
   int MINIMUM_COUNTDOWN = 30;
 

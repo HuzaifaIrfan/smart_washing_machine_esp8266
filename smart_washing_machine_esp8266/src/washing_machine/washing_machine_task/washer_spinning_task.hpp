@@ -15,11 +15,11 @@ private:
   int DEFAULT_COUNTDOWN = 300;
   int MINIMUM_COUNTDOWN = 30;
 
-  short MAXIMUM_SPIN_TIME = 5;
+  short MAXIMUM_SPIN_TIME = 10;
   short DEFAULT_SPIN_TIME = 5;
   short MINIMUM_SPIN_TIME = 5;
 
-  short MAXIMUM_WAIT_TIME = 2;
+  short MAXIMUM_WAIT_TIME = 10;
   short DEFAULT_WAIT_TIME = 2;
   short MINIMUM_WAIT_TIME = 2;
 

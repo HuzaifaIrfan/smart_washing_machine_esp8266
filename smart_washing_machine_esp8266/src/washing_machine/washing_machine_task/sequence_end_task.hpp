@@ -13,8 +13,8 @@ private:
   void paused_loop();
 
   int MAXIMUM_COUNTDOWN = 30;
-  int DEFAULT_COUNTDOWN = 5;
-  int MINIMUM_COUNTDOWN = 5;
+  int DEFAULT_COUNTDOWN = 20;
+  int MINIMUM_COUNTDOWN = 20;
 
 public:
   using WashingMachineTask::WashingMachineTask;
@@ -23,9 +23,6 @@ public:
   void setup(int tmp_count_down, int beep_count);
   void setup(int tmp_count_down, int beep_count, int var_2);
 
-
-
-  bool skip();
 };
 
 #endif
