@@ -234,11 +234,19 @@ void RESTAPIServer::setup()
   Serial.println("");
 
   // Wait for connection
-  while (WiFi.status() != WL_CONNECTED)
+  // while (WiFi.status() != WL_CONNECTED)
+  // {
+  //   delay(500);
+  //   Serial.print(".");
+  // }
+
+  while (WiFi.waitForConnectResult() != WL_CONNECTED)
   {
-    delay(500);
-    Serial.print(".");
+    Serial.println("Connection Failed! Rebooting...");
+    delay(2000);
+    ESP.restart();
   }
+
   Serial.println("");
   Serial.print("Connected to ");
   Serial.println(ssid);

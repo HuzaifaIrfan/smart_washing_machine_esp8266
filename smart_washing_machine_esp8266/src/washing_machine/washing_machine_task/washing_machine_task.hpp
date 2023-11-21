@@ -32,7 +32,7 @@ public:
 
   virtual void run()
   {
-      washing_machine->close_lid();
+    washing_machine->close_lid();
     running_task = true;
     hold_task = false;
   }
@@ -101,6 +101,7 @@ public:
     if (count_down <= 0)
     {
       pause();
+      paused_loop();
       return true;
     }
     return false;

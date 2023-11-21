@@ -9,6 +9,7 @@ class WatchDog
 private:
 public:
     WatchDog();
+    void disable();
     void setup();
     void reset();
 };

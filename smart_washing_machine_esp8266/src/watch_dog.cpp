@@ -5,9 +5,15 @@ WatchDog::WatchDog()
 {
 }
 
-void WatchDog::setup()
+void WatchDog::disable()
 {
     ESP.wdtDisable(); // Disable WDT
+}
+
+
+void WatchDog::setup()
+{
+    disable();
     ESP.wdtEnable(4000); // Enable WDT with a timeout of 4 seconds
     Serial.println("WDT Enabled");
 }

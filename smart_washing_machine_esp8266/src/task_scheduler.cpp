@@ -1,6 +1,8 @@
 
 #include "watch_dog.hpp"
 
+// #include "ota/ota.hpp"
+
 #include "task_scheduler.hpp"
 
 #include "TaskManagerIO.h"
@@ -58,14 +60,16 @@ void TaskScheduler::setup()
                                     washing_machine_controller.loop();
                                     watch_dog.reset();
                                     secPassed = false;
-                                  }
-                                });
+                                  } });
 
   // taskManager.scheduleFixedRate(100, []
   //                               { buttons.loop(); });
 
   taskManager.scheduleFixedRate(1, []
                                 { rest_api_server.loop(); });
+
+  // taskManager.scheduleFixedRate(10, []
+  //                               { ota.loop(); });
 
   // Interval in microsecs
   if (ITimer.attachInterruptInterval(TIMER_INTERVAL_MS * 1000, TimerHandler))
@@ -79,6 +83,7 @@ void TaskScheduler::setup()
   }
 
   // display.init();
+  // ota.setup();
   watch_dog.setup();
   rest_api_server.setup();
 }
