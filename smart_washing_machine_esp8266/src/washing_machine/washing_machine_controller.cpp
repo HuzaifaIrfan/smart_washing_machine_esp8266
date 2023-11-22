@@ -31,6 +31,8 @@ void WashingMachineController::next_task_sequence()
     current_task_sequence_pointer = current_task_sequence_pointer + 1;
     setup_next_task(washing_machine_task_sequence[current_task_sequence_pointer]);
     run();
+  }else{
+    pause();
   }
 }
 
